@@ -1,7 +1,5 @@
 package tests;
 
-
-
 import org.junit.jupiter.api.Test;
 import pages.WebFormPage;
 
@@ -16,7 +14,7 @@ public class WebFormTest extends WebTestBase {
                 .setEmail("testahmed@gmail.com")
                 .setGender("Male")
                 .setUserNumber("7904744684")
-                .setDateOfBirth("01", "April", "1985")
+                .setDateOfBirth("11", "April", "1985")
                 .setSubject("Maths")
                 .setHobby("Sports")
                 .uploadFile("leopard.jpg")
@@ -28,7 +26,7 @@ public class WebFormTest extends WebTestBase {
                 .checkResult("Student Email", "testahmed@gmail.com")
                 .checkResult("Gender", "Male")
                 .checkResult("Mobile", "7904744684")
-                .checkResult("Date of Birth", "01 April,1985")
+                .checkResult("Date of Birth", "11 April,1985")
                 .checkResult("Subjects", "Maths")
                 .checkResult("Hobbies", "Sports")
                 .checkResult("Picture", "leopard.jpg")
@@ -42,12 +40,12 @@ public class WebFormTest extends WebTestBase {
                 .setLastName("Ahmedov")
                 .setGender("Male")
                 .setUserNumber("7904744684")
-                .setDateOfBirth("01", "April", "1985")
+                .setDateOfBirth("11", "April", "1985")
                 .submitClick()
                 .checkResult("Student Name", "Ahmed Ahmedov")
                 .checkResult("Gender", "Male")
                 .checkResult("Mobile", "7904744684")
-                .checkResult("Date of Birth", "01 April,1985");
+                .checkResult("Date of Birth", "11 April,1985");
     }
 
     @Test
