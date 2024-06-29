@@ -8,7 +8,8 @@ public class WebFormTest extends WebTestBase {
 
     @Test
     void webFormTest() {
-        webFormPage.openPage ()
+        webFormPage.openPage();
+        webFormPage.bannerDrop()
                 .setFirstName("Ahmed")
                 .setLastName("Ahmedov")
                 .setEmail("testahmed@gmail.com")
@@ -35,7 +36,8 @@ public class WebFormTest extends WebTestBase {
     }
     @Test
     void shortFillFormTest() {
-        webFormPage.openPage()
+        webFormPage.openPage();
+        webFormPage.bannerDrop()
                 .setFirstName("Ahmed")
                 .setLastName("Ahmedov")
                 .setGender("Male")
@@ -50,7 +52,8 @@ public class WebFormTest extends WebTestBase {
 
     @Test
     void incorrectFillFormTest() {
-        webFormPage.openPage()
+        webFormPage.openPage();
+        webFormPage.bannerDrop()
                 .setFirstName("Ahmed1")
                 .setLastName("Ahmedov")
                 .setGender("Male")

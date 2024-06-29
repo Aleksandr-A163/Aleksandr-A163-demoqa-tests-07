@@ -3,13 +3,15 @@ package tests;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
+
 public class TextBoxTests extends WebTestBase {
 
     TextBoxPage textBox = new TextBoxPage();
 
     @Test
     void fillFormTest() {
-        textBox.openPage()
+        textBox.openPage();
+        textBox.bannerDrop()
                 .setFullName("Ahmed")
                 .setEmail("testahmed@gmail.com")
                 .setCurrentAddress("Istanbul")

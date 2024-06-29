@@ -33,7 +33,12 @@ public class WebFormPage {
 
     public WebFormPage openPage() {
         open("/automation-practice-form");
-        BannerDrop.bannerDrop();
+        return this;
+    }
+
+    public WebFormPage bannerDrop() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         return this;
     }
 

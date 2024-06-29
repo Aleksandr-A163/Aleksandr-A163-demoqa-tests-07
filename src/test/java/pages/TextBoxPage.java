@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class TextBoxPage {
 
@@ -19,7 +20,11 @@ public class TextBoxPage {
 
     public TextBoxPage openPage() {
         open("/text-box");
-        BannerDrop.bannerDrop();
+        return this;
+    }
+    public TextBoxPage bannerDrop() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         return this;
     }
 
