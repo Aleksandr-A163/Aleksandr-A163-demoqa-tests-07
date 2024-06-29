@@ -1,65 +1,63 @@
 package tests;
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+
+
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
-import com.codeborne.selenide.Selenide;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Condition.text;
+import pages.WebFormPage;
 
-public class WebFormTest {
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.holdBrowserOpen = true;
-    }
-
+public class WebFormTest extends WebTestBase {
+        WebFormPage webFormPage = new WebFormPage();
 
     @Test
     void webFormTest() {
-        open("/automation-practice-form");
-        executeJavaScript ("$('#fixedban').remove()");
-        executeJavaScript ("$('footer').remove()");
-
-        $("#firstName").setValue("Ahmed");
-        $("#lastName").setValue("Ahmedov");
-        $("#userEmail").setValue("testahmed@gmail.com");
-        $("#gender-radio-1+label").click();
-        $("#userNumber").setValue("7904744684");
-        $("#dateOfBirth #dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption("April");
-        $(".react-datepicker__month-select").click();
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption("1985");
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__day--001").click();
-        $("#subjectsInput").setValue("Maths").pressEnter();
-        $("#hobbies-checkbox-1+label").click();
-        $("#hobbies-checkbox-2+label").click();
-        $("#hobbies-checkbox-3+label").click();
-        $("#uploadPicture").uploadFromClasspath("leopard.png");
-        $("#currentAddress").setValue("Istanbul");
-        $("#react-select-3-input").setValue("Haryana").pressEnter();
-        $("#react-select-4-input").setValue("Karnal").pressEnter();
-        $("#submit").click();
-
-        $("[class=table-responsive]").shouldHave(text("Ahmed Ahmedov"));
-        $("[class=table-responsive]").shouldHave(text("testahmed@gmail.com"));
-        $("[class=table-responsive]").shouldHave(text("Male"));
-        $("[class=table-responsive]").shouldHave(text("7904744684"));
-        $("[class=table-responsive]").shouldHave(text("01 April,1985"));
-        $("[class=table-responsive]").shouldHave(text("Maths"));
-        $("[class=table-responsive]").shouldHave(text("Sports, Reading, Music"));
-        $("[class=table-responsive]").shouldHave(text("leopard.png"));
-        $("[class=table-responsive]").shouldHave(text("Istanbul"));
-        $("[class=table-responsive]").shouldHave(text("Haryana Karnal"));
+        webFormPage.openPage ()
+                .setFirstName("Ahmed")
+                .setLastName("Ahmedov")
+                .setEmail("testahmed@gmail.com")
+                .setGender("Male")
+                .setUserNumber("7904744684")
+                .setDateOfBirth("01", "April", "1985")
+                .setSubject("Maths")
+                .setHobby("Sports")
+                .uploadFile("leopard.jpg")
+                .setCurrentAddress("Istanbul")
+                .setState("Haryana")
+                .setCity("Karnal")
+                .submitClick()
+                .checkResult("Student Name", "Ahmed Ahmedov")
+                .checkResult("Student Email", "testahmed@gmail.com")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "7904744684")
+                .checkResult("Date of Birth", "01 April,1985")
+                .checkResult("Subjects", "Maths")
+                .checkResult("Hobbies", "Sports")
+                .checkResult("Picture", "leopard.jpg")
+                .checkResult("Address", "Istanbul")
+                .checkResult("State and City", "Haryana Karnal");
     }
-    @AfterEach
-    void afterEach() {
-        Selenide.closeWebDriver();
+    @Test
+    void shortFillFormTest() {
+        webFormPage.openPage()
+                .setFirstName("Ahmed")
+                .setLastName("Ahmedov")
+                .setGender("Male")
+                .setUserNumber("7904744684")
+                .setDateOfBirth("01", "April", "1985")
+                .submitClick()
+                .checkResult("Student Name", "Ahmed Ahmedov")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "7904744684")
+                .checkResult("Date of Birth", "01 April,1985");
+    }
+
+    @Test
+    void incorrectFillFormTest() {
+        webFormPage.openPage()
+                .setFirstName("Ahmed1")
+                .setLastName("Ahmedov")
+                .setGender("Male")
+                .setDateOfBirth("29", "September", "1986")
+                .submitClick()
+                .checkAbsenceFormResult();
     }
 }

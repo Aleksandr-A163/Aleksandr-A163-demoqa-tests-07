@@ -10,14 +10,14 @@ public class TextBoxTests extends WebTestBase {
     @Test
     void fillFormTest() {
         textBox.openPage()
-                .setFullName("Artur")
-                .setEmail("king@yandex.ru")
-                .setCurrentAddress("Castle Camelot")
-                .setPermanentAddress("Castle Camelot 2")
+                .setFullName("Ahmed")
+                .setEmail("testahmed@gmail.com")
+                .setCurrentAddress("Istanbul")
+                .setPermanentAddress("Istanbul 33")
                 .submitClick()
-                .checkResult("name","Artur")
-                .checkResult("email","king@yandex.ru")
-                .checkResult("currentAddress","Castle Camelot")
-                .checkResult("permanentAddress","Castle Camelot 2");
+                .checkResult("name","Ahmed")
+                .checkResult("email","testahmed@gmail.com")
+                .checkResult("currentAddress","Istanbul")
+                .checkResult("permanentAddress","Istanbul 33");
     }
 }

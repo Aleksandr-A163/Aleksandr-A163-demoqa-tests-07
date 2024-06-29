@@ -8,13 +8,13 @@ import org.junit.jupiter.api.BeforeAll;
 public class WebTestBase {
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
     }
 
     @AfterEach
-    void closeWebDriver() {
+    void tearDown() {
         Selenide.closeWebDriver();
     }
 }

@@ -3,7 +3,8 @@ package pages.components;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-// (Таблицу с результатами введенных данных тоже вынести в components)
+
+// (Внесение таблицы данных в components)
 public class ResultFormComponent {
 
     public void checkResultForm(String key, String value){
